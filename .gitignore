@@ -1,0 +1,11 @@
+*.opendb
+
+# Build results
+x64/
+
+# vscode
+.vscode/settings.json  
+
+# SQL Server files
+*.mdf
+*.ldf
