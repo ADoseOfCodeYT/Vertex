@@ -112,9 +112,9 @@ int main()
 
     stbi_image_free(data); // free from memory jail
 
-    ShaderManager.use();
+    ShaderManager.Run();
     glUniform1i(glGetUniformLocation(ShaderManager.ID, "texture0"), 0); // set it manually
-    ShaderManager.setInt("texture1", 1); // or with shader class
+    ShaderManager.SetInt("texture1", 1); // or with shader class
 
     // main render loop
     while (!glfwWindowShouldClose(window))
@@ -130,12 +130,12 @@ int main()
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture1);
 
-        ShaderManager.use();
+        ShaderManager.Run();
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
        
-        ShaderManager.setFloat("MixAmount", MixAmount);
+        ShaderManager.SetFloat("MixAmount", MixAmount);
 
         // check and call events and swap the buffers
         glfwSwapBuffers(window);
