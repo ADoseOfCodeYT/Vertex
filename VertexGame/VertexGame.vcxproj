@@ -44,12 +44,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)Linking\include;$(VC_Include;Path);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)ThirdParty;$(ProjectDir)Linking\include;$(VC_Include;Path);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(ProjectDir)Linking\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <TargetName>Vertex</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)Linking\include;$(VC_Include;Path);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(ProjectDir)ThirdParty;$(ProjectDir)Linking\include;$(VC_Include;Path);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>$(ProjectDir)Linking\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <TargetName>Vertex</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -91,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\fragment_shader.glsl" />
-    <None Include="vertex_shader.glsl" />
+    <None Include="Shaders\vertex_shader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

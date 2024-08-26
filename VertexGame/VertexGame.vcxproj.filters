@@ -14,10 +14,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex_shader.glsl">
+    <None Include="Shaders\fragment_shader.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\fragment_shader.glsl">
+    <None Include="Shaders\vertex_shader.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
