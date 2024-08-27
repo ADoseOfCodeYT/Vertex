@@ -1,10 +1,5 @@
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 #include "Main.h"
-#include "ShaderManager.h"
-
-#include <iostream>
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -36,7 +31,7 @@ int main()
         return -1;
     }
     
-    ShaderManager ShaderManager("Shaders/vertex_shader.glsl", "Shaders/fragment_shader.glsl"); // you can name your shader files however you like
+    ShaderManager ShaderManager("Shaders/vertex_shader.glsl", "Shaders/fragment_shader.glsl");
 
 
     //buffers
@@ -54,14 +49,11 @@ int main()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
     // texture coord attribute
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);  
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);  
 
     // load and create the textures
     unsigned int texture0;
@@ -113,7 +105,7 @@ int main()
     stbi_image_free(data); // free from memory jail
 
     ShaderManager.Run();
-    glUniform1i(glGetUniformLocation(ShaderManager.ID, "texture0"), 0); // set it manually
+    ShaderManager.SetInt("texture0", 0);
     ShaderManager.SetInt("texture1", 1); // or with shader class
 
     // main render loop
@@ -130,12 +122,19 @@ int main()
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture1);
 
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+        
         ShaderManager.Run();
+
+        unsigned int transformLoc = glGetUniformLocation(ShaderManager.ID, "transform");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+
         glBindVertexArray(VAO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glBindVertexArray(0);
-       
-        ShaderManager.SetFloat("MixAmount", MixAmount);
+
 
         // check and call events and swap the buffers
         glfwSwapBuffers(window);
@@ -161,17 +160,5 @@ void ProcessInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, true);
-    }
-    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-    {
-        MixAmount += 0.001f; // change this value accordingly (might be too slow or too fast based on system hardware)
-        if (MixAmount >= 1.0f)
-            MixAmount = 1.0f;
-    }
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-    {
-        MixAmount -= 0.001f; // change this value accordingly (might be too slow or too fast based on system hardware)
-        if (MixAmount <= 0.0f)
-            MixAmount = 0.0f;
     }
 }
