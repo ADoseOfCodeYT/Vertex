@@ -98,8 +98,10 @@
     <ClInclude Include="ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\fragment_shader.glsl" />
-    <None Include="Shaders\vertex_shader.glsl" />
+    <None Include="Shaders\cube_fs.glsl" />
+    <None Include="Shaders\cube_vs.glsl" />
+    <None Include="Shaders\lighting_fs.glsl" />
+    <None Include="Shaders\lighting_vs.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

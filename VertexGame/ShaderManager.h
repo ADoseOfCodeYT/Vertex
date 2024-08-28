@@ -3,7 +3,7 @@
 #ifndef SHADERMANAGER
 #define SHADERMANAGER
 
-#include <glad/glad.h> // include glad to get all the required OpenGL headers
+#include <glad/glad.h> 
 
 #include "Math.h"
 
@@ -13,6 +13,7 @@
 #include <iostream>
 
 
+// REMEBER: TO DEBUG SHADER RELATED ERRORS, CHECK THE CONSOLE IN DEBUG MODE
 class ShaderManager
 {
 public:

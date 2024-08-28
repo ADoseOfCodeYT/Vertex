@@ -16,10 +16,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\fragment_shader.glsl">
+    <None Include="Shaders\lighting_fs.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\vertex_shader.glsl">
+    <None Include="Shaders\lighting_vs.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\cube_fs.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\cube_vs.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
