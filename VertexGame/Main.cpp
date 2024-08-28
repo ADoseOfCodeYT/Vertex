@@ -1,4 +1,6 @@
 
+
+
 #include "Main.h"
 
 #define WINDOW_WIDTH 1280
@@ -12,9 +14,11 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-
-int main() 
-{
+#ifdef _DEBUG
+int main() {
+#else
+int WinMain(){
+#endif
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
