@@ -1,4 +1,4 @@
-#pragma once
+
 
 #ifndef SHADERMANAGER
 #define SHADERMANAGER

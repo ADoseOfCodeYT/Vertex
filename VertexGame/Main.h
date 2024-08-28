@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "ShaderManager.h"
+#include "CameraManager.h"
 #include "Math.h"
 
 #define STB_IMAGE_IMPLEMENTATION
@@ -11,17 +12,12 @@
 
 void FrameBufferSizeCallBack(GLFWwindow* window, int width, int height);
 void ProcessInput(GLFWwindow* window);
+void MouseCallBack(GLFWwindow* window, double xposIn, double yposIn);
+void ScrollCallBack(GLFWwindow* window, double xoffset, double yoffset);
 
-float MixAmount = 0.5f;
+bool WireframeEnabled = false; // TODO: Implement this
 
-bool WireframeEnabled = false;
-
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
-glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
-glm::vec3 cameraUp = glm::cross(cameraDirection, cameraRight);
+Camera GlobalCamera(glm::vec3(0.0f, 0.0f, 3.0f));
 
 float vertices[] = {
     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,

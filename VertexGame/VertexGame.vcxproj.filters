@@ -8,6 +8,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="CameraManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
