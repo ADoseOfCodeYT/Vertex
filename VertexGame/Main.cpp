@@ -103,12 +103,18 @@ int WinMain()
         lightingShader.SetVec3("material.specular", 0.5f, 0.5f, 0.5f);
         lightingShader.SetFloat("material.shininess", 32.0f);
 
-        lightingShader.SetVec3("light.ambient", 0.2f, 0.2f, 0.2f);
-        lightingShader.SetVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
-        lightingShader.SetVec3("light.specular", 1.0f, 1.0f, 1.0f);
-
-        lightingShader.SetVec3("light.position", lightPos);
+        lightingShader.SetVec3("light.position", GlobalCamera.Position);
+        lightingShader.SetVec3("light.direction", GlobalCamera.Front);
+        lightingShader.SetFloat("light.cutOff", glm::cos(glm::radians(12.5f)));
+        lightingShader.SetFloat("light.outerCutOff", glm::cos(glm::radians(17.5f)));
         lightingShader.SetVec3("viewPos", GlobalCamera.Position);
+
+        lightingShader.SetVec3("light.ambient", 0.1f, 0.1f, 0.1f);
+        lightingShader.SetVec3("light.diffuse", 0.8f, 0.8f, 0.8f);
+        lightingShader.SetVec3("light.specular", 1.0f, 1.0f, 1.0f);
+        lightingShader.SetFloat("light.constant", 1.0f);
+        lightingShader.SetFloat("light.linear", 0.09f);
+        lightingShader.SetFloat("light.quadratic", 0.032f);
 
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(GlobalCamera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, GlobalCamera.NearPlane, 100.0f);
@@ -121,8 +127,6 @@ int WinMain()
         glm::mat4 model = glm::mat4(1.0f);
         lightingShader.SetMat4("model", model);
 
-        lightPos.x = sin(glfwGetTime()) * 2.0f;
-
         // bind diffuse map
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, diffuseMap);
@@ -131,15 +135,26 @@ int WinMain()
         glBindTexture(GL_TEXTURE_2D, specularMap);
 
         glBindVertexArray(cubeVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        for (unsigned int i = 0; i < 10; i++)
+        {
+            // calculate the model matrix for each object and pass it to shader before drawing
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, cubePositions[i]);
+            float angle = 20.0f * i;
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            lightingShader.SetMat4("model", model);
 
-        lightCubeShader.Run();
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
+
+
+        /*lightCubeShader.Run();
         lightCubeShader.SetMat4("projection", projection);
         lightCubeShader.SetMat4("view", view);
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
-        model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-        lightCubeShader.SetMat4("model", model);
+        model = glm::scale(model, glm::vec3(0.1f));
+        lightCubeShader.SetMat4("model", model);*/
 
         glBindVertexArray(lightCubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
