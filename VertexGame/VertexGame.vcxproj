@@ -63,6 +63,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,6 +79,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -90,18 +92,20 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MaterialManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\cube_fs.glsl" />
-    <None Include="Shaders\cube_vs.glsl" />
-    <None Include="Shaders\lighting_fs.glsl" />
-    <None Include="Shaders\lighting_vs.glsl" />
+    <None Include="Shaders\cubeFS.glsl" />
+    <None Include="Shaders\cubeVS.glsl" />
+    <None Include="Shaders\lightingFS.glsl" />
+    <None Include="Shaders\lightingVS.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,12 +3,14 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MaterialManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="MaterialManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -16,16 +18,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\lighting_fs.glsl">
+    <None Include="Shaders\lightingFS.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\lighting_vs.glsl">
+    <None Include="Shaders\lightingVS.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\cube_fs.glsl">
+    <None Include="Shaders\cubeFS.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\cube_vs.glsl">
+    <None Include="Shaders\cubeVS.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

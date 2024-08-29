@@ -1,6 +1,4 @@
 
-
-
 #include "Main.h"
 
 #define WINDOW_WIDTH 1280
@@ -46,8 +44,8 @@ int WinMain()
         return -1;
     }
     
-    ShaderManager lightingShader("Shaders/lighting_vs.glsl", "Shaders/lighting_fs.glsl");
-    ShaderManager lightCubeShader("Shaders/cube_vs.glsl", "Shaders/cube_fs.glsl");
+    ShaderManager lightingShader("Shaders/lightingVS.glsl", "Shaders/lightingFS.glsl");
+    ShaderManager lightCubeShader("Shaders/cubeVS.glsl", "Shaders/cubeFS.glsl");
 
     //buffers
     unsigned int VBO, cubeVAO;
@@ -58,12 +56,13 @@ int WinMain()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     glBindVertexArray(cubeVAO);
-    // position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    // normal 
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     unsigned int lightCubeVAO; // VBO stays the same for now
     glGenVertexArrays(1, &lightCubeVAO);
@@ -71,8 +70,15 @@ int WinMain()
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    unsigned int diffuseMap = MaterialManager::LoadTexture("TexturesSource/container2_diffuse.png");
+    unsigned int specularMap = MaterialManager::LoadTexture("TexturesSource/container2_specular.png");
+
+    lightingShader.Run();
+    lightingShader.SetInt("material.diffuse", 0);
+    lightingShader.SetInt("material.specular", 1);
 
     glEnable(GL_DEPTH_TEST);
 
@@ -89,37 +95,51 @@ int WinMain()
         //rendering
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+
         lightingShader.Run();
 
-        lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-        lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        lightingShader.setVec3("lightPos", lightPos);
-        lightingShader.setVec3("viewPos", GlobalCamera.Position);
+        lightingShader.SetVec3("material.ambient", 1.0f, 0.5f, 0.31f);
+        lightingShader.SetVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
+        lightingShader.SetVec3("material.specular", 0.5f, 0.5f, 0.5f);
+        lightingShader.SetFloat("material.shininess", 32.0f);
+
+        lightingShader.SetVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+        lightingShader.SetVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
+        lightingShader.SetVec3("light.specular", 1.0f, 1.0f, 1.0f);
+
+        lightingShader.SetVec3("light.position", lightPos);
+        lightingShader.SetVec3("viewPos", GlobalCamera.Position);
 
         // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projection = glm::perspective(glm::radians(GlobalCamera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, GlobalCamera.NearPlane, 100.0f);
-        lightingShader.setMat4("projection", projection);
+        lightingShader.SetMat4("projection", projection);
 
         // camera/view transformation
         glm::mat4 view = GlobalCamera.GetViewMatrix();
-        lightingShader.setMat4("view", view);
+        lightingShader.SetMat4("view", view);
 
         glm::mat4 model = glm::mat4(1.0f);
-        lightingShader.setMat4("model", model);
+        lightingShader.SetMat4("model", model);
 
         lightPos.x = sin(glfwGetTime()) * 2.0f;
+
+        // bind diffuse map
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, diffuseMap);
+        // bind specular map
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, specularMap);
 
         glBindVertexArray(cubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
         lightCubeShader.Run();
-        lightCubeShader.setMat4("projection", projection);
-        lightCubeShader.setMat4("view", view);
+        lightCubeShader.SetMat4("projection", projection);
+        lightCubeShader.SetMat4("view", view);
         model = glm::mat4(1.0f);
         model = glm::translate(model, lightPos);
         model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
-        lightCubeShader.setMat4("model", model);
+        lightCubeShader.SetMat4("model", model);
 
         glBindVertexArray(lightCubeVAO);
         glDrawArrays(GL_TRIANGLES, 0, 36);
