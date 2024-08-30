@@ -4,6 +4,13 @@
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
@@ -11,10 +18,34 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="MaterialManager.h" />
+    <ClInclude Include="Thirdparty\imgui\imconfig.h" />
+    <ClInclude Include="Thirdparty\imgui\imgui.h" />
+    <ClInclude Include="Thirdparty\imgui\imgui_impl_glfw.h" />
+    <ClInclude Include="Thirdparty\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="Thirdparty\imgui\imgui_internal.h" />
+    <ClInclude Include="Thirdparty\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Thirdparty\imgui\imstb_textedit.h" />
+    <ClInclude Include="Thirdparty\imgui\imstb_truetype.h" />
+    <ClInclude Include="Thirdparty\STBImage\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
       <UniqueIdentifier>{1075a758-fd0d-46bc-9d17-9008d08ca3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{619e6f8a-6d30-4eea-9a0b-8d232aa6c968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\JoltPhysics">
+      <UniqueIdentifier>{c395c81f-ea43-417b-a53b-0dbec7592bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\STBImage">
+      <UniqueIdentifier>{81922fce-ec07-4284-8bac-9a0c5e00b83d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\imgui">
+      <UniqueIdentifier>{e616c39a-e0d5-440b-b49e-b773974344f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\glm">
+      <UniqueIdentifier>{c9c68da6-165d-4065-90b5-4ce892700ee9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

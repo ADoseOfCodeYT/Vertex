@@ -23,7 +23,7 @@ int WinMain()
 
     // window creation
 
-    GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "No more scoobert :(", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, WindowTitle, NULL, NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -34,7 +34,15 @@ int WinMain()
     glfwSetFramebufferSizeCallback(window, FrameBufferSizeCallBack); // for resizing window
     glfwSetCursorPosCallback(window, MouseCallBack);
     glfwSetScrollCallback(window, ScrollCallBack);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetKeyCallback(window, KeyCallBack);
+    if (MouseLockEnabled)
+    {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    }
+    else
+    {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    }
 
     // load the open gl function pointers
 
@@ -43,6 +51,15 @@ int WinMain()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
+    // load imgui
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 460");
     
     ShaderManager lightingShader("Shaders/lightingVS.glsl", "Shaders/lightingFS.glsl");
     ShaderManager lightCubeShader("Shaders/cubeVS.glsl", "Shaders/cubeFS.glsl");
@@ -87,6 +104,24 @@ int WinMain()
     while (!glfwWindowShouldClose(window))
     {
         ProcessInput(window); // TODO: replace with SDL
+        
+        if (MouseLockEnabled)
+        {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        }
+        else
+        {
+            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        }
+
+        if (WireframeEnabled)
+        {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        }
+        else
+        {
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        }
 
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
@@ -95,6 +130,14 @@ int WinMain()
         //rendering
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        ImGui::Begin("wow a window");
+        ImGui::Text("idk what to do with it");
+        ImGui::End();
 
         lightingShader.Run();
         lightingShader.SetVec3("viewPos", GlobalCamera.Position);
@@ -200,6 +243,9 @@ int WinMain()
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
+        // render the imgui elements
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // check and call events and swap the buffers
         glfwSwapBuffers(window);
@@ -210,6 +256,10 @@ int WinMain()
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteVertexArrays(1, &lightCubeVAO);
     glDeleteBuffers(1, &VBO);
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
 
     glfwTerminate();
     return 0;
@@ -222,12 +272,7 @@ void FrameBufferSizeCallBack(GLFWwindow* window, int width, int height)
 
 void ProcessInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    {
-        glfwSetWindowShouldClose(window, true);
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && !IsCtrlDown)
         GlobalCamera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         GlobalCamera.ProcessKeyboard(BACKWARD, deltaTime);
@@ -235,6 +280,24 @@ void ProcessInput(GLFWwindow* window)
         GlobalCamera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         GlobalCamera.ProcessKeyboard(RIGHT, deltaTime);
+}
+
+void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
+    {
+        MouseLockEnabled = !MouseLockEnabled;
+    }
+    if (key == GLFW_KEY_W && action == GLFW_PRESS && IsCtrlDown)
+    {
+        WireframeEnabled = !WireframeEnabled;
+    }
+    if (key == GLFW_KEY_LEFT_CONTROL) IsCtrlDown = action == GLFW_PRESS;
+
+    if (key == GLFW_KEY_ESCAPE)
+    {
+        glfwSetWindowShouldClose(window, true);
+    }
 }
 
 void MouseCallBack(GLFWwindow* window, double xposIn, double yposIn)
@@ -262,3 +325,4 @@ void ScrollCallBack(GLFWwindow* window, double xoffset, double yoffset)
 {
     GlobalCamera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
+
