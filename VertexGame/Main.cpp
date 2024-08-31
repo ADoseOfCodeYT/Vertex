@@ -1,6 +1,7 @@
 
 #include "Main.h"
 
+
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 720
 
@@ -178,14 +179,6 @@ int WinMain()
         lightingShader.SetFloat("pointLights[2].constant", 1.0f);
         lightingShader.SetFloat("pointLights[2].linear", 0.09f);
         lightingShader.SetFloat("pointLights[2].quadratic", 0.032f);
-        // point light 4
-        lightingShader.SetVec3("pointLights[3].position", PointLightPositions[3]);
-        lightingShader.SetVec3("pointLights[3].ambient", 0.05f, 0.05f, 0.05f);
-        lightingShader.SetVec3("pointLights[3].diffuse", 0.8f, 0.8f, 0.8f);
-        lightingShader.SetVec3("pointLights[3].specular", 1.0f, 1.0f, 1.0f);
-        lightingShader.SetFloat("pointLights[3].constant", 1.0f);
-        lightingShader.SetFloat("pointLights[3].linear", 0.09f);
-        lightingShader.SetFloat("pointLights[3].quadratic", 0.032f);
         // spotLight
         lightingShader.SetVec3("spotLight.position", GlobalCamera.Position);
         lightingShader.SetVec3("spotLight.direction", GlobalCamera.Front);
@@ -273,13 +266,13 @@ void FrameBufferSizeCallBack(GLFWwindow* window, int width, int height)
 void ProcessInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && !IsCtrlDown)
-        GlobalCamera.ProcessKeyboard(FORWARD, deltaTime);
+        GlobalCamera.ProcessMovement(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        GlobalCamera.ProcessKeyboard(BACKWARD, deltaTime);
+        GlobalCamera.ProcessMovement(BACKWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        GlobalCamera.ProcessKeyboard(LEFT, deltaTime);
+        GlobalCamera.ProcessMovement(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        GlobalCamera.ProcessKeyboard(RIGHT, deltaTime);
+        GlobalCamera.ProcessMovement(RIGHT, deltaTime);
 }
 
 void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)

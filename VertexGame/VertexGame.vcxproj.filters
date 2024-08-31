@@ -3,30 +3,82 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Thirdparty\imgui\imgui.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Thirdparty\imgui\imgui_demo.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Thirdparty\imgui\imgui_draw.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Thirdparty\imgui\imgui_impl_glfw.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Thirdparty\imgui\imgui_impl_opengl3.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Thirdparty\imgui\imgui_tables.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
-    <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="CameraManager.h" />
-    <ClInclude Include="MaterialManager.h" />
-    <ClInclude Include="Thirdparty\imgui\imconfig.h" />
-    <ClInclude Include="Thirdparty\imgui\imgui.h" />
-    <ClInclude Include="Thirdparty\imgui\imgui_impl_glfw.h" />
-    <ClInclude Include="Thirdparty\imgui\imgui_impl_opengl3.h" />
-    <ClInclude Include="Thirdparty\imgui\imgui_internal.h" />
-    <ClInclude Include="Thirdparty\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Thirdparty\imgui\imstb_textedit.h" />
-    <ClInclude Include="Thirdparty\imgui\imstb_truetype.h" />
-    <ClInclude Include="Thirdparty\STBImage\stb_image.h" />
+    <ClInclude Include="Thirdparty\imgui\imconfig.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imgui.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imgui_impl_glfw.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imgui_impl_opengl3.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imgui_internal.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imstb_rectpack.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imstb_textedit.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\imgui\imstb_truetype.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Thirdparty\STBImage\stb_image.h">
+      <Filter>ThirdParty\STBImage</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -35,17 +87,14 @@
     <Filter Include="ThirdParty">
       <UniqueIdentifier>{619e6f8a-6d30-4eea-9a0b-8d232aa6c968}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty\JoltPhysics">
-      <UniqueIdentifier>{c395c81f-ea43-417b-a53b-0dbec7592bca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ThirdParty\STBImage">
       <UniqueIdentifier>{81922fce-ec07-4284-8bac-9a0c5e00b83d}</UniqueIdentifier>
     </Filter>
     <Filter Include="ThirdParty\imgui">
       <UniqueIdentifier>{e616c39a-e0d5-440b-b49e-b773974344f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty\glm">
-      <UniqueIdentifier>{c9c68da6-165d-4065-90b5-4ce892700ee9}</UniqueIdentifier>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{0d67ac1c-a705-40c6-84cf-a2ac405b9a37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
