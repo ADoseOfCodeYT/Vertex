@@ -34,7 +34,7 @@ unsigned int MaterialManager::LoadTexture(char const* path, bool FlipVertically)
     }
     else
     {
-        std::cout << "Texture failed to load at path: " << path << std::endl;
+        std::cout << "MATERIAL ERROR : TEXTURE FAILED TO LOAD : " << path << std::endl;
         stbi_image_free(data);
     }
 
@@ -62,7 +62,7 @@ unsigned int MaterialManager::LoadCubemap(std::vector<std::string> faces, bool F
         }
         else
         {
-            std::cout << "Cubemap tex failed to load at path: " << faces[i] << std::endl;
+            std::cout << "MATERIAL ERROR : CUBEMAP TEXTURE FAILED TO LOAD : " << faces[i] << std::endl;
             stbi_image_free(data);
         }
     }

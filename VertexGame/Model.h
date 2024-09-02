@@ -51,7 +51,7 @@ private:
         // check for errors
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
         {
-            std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
+            std::cout << "ASSIMP ERROR : " << importer.GetErrorString() << std::endl;
             return;
         }
         // retrieve the directory path of the filepath
@@ -234,7 +234,7 @@ unsigned int TextureFromFile(const char* path, const std::string& directory, boo
     }
     else
     {
-        std::cout << "Texture failed to load at path: " << path << std::endl;
+        std::cout << "MODEL ERROR: TEXTURE FAILED TO LOAD : " << path << std::endl;
         stbi_image_free(data);
     }
 
