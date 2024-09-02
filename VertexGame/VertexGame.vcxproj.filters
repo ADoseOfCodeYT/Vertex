@@ -27,7 +27,7 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderManager.cpp">
+    <ClCompile Include="Shader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
@@ -69,7 +69,7 @@
     <ClInclude Include="Mesh.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderManager.h">
+    <ClInclude Include="Shader.h">
       <Filter>Shaders</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
@@ -83,6 +83,9 @@
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,6 +125,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\modelVS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\skyboxFS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\skyboxVS.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

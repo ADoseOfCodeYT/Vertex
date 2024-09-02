@@ -9,7 +9,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
     SetupMesh();
 }
 
-void Mesh::Draw(ShaderManager& shader)
+void Mesh::Draw(Shader& shader)
 {
     // bind appropriate textures
     unsigned int diffuseNr = 1;

@@ -1,7 +1,7 @@
 
 
-#ifndef SHADERMANAGER
-#define SHADERMANAGER
+#ifndef SHADER
+#define SHADER
 #include <glad/glad.h>
 #include <string>
 #include <fstream>
@@ -11,12 +11,12 @@
 #include "Math.h"
 
 // REMEBER: TO DEBUG SHADER RELATED ERRORS, CHECK THE CONSOLE IN DEBUG MODE
-class ShaderManager
+class Shader
 {
 public:
     unsigned int ID;
     // constructor generates the shader on the fly
-    ShaderManager(const char* vertexPath, const char* fragmentPath);
+    Shader(const char* vertexPath, const char* fragmentPath);
     
     // activate the shader
     void Run();

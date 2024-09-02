@@ -6,11 +6,12 @@
 #include <GLFW/glfw3.h> 
 #include <iostream>
 
-#include "ShaderManager.h"
+#include "Shader.h"
 #include "Camera.h"
 #include "MaterialManager.h"
 #include "Model.h"
 #include "Math.h"
+#include "Level.h"
 
 const char* WindowTitle = "half life 3!!!?!?!?!?!?";
 

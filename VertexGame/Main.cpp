@@ -53,6 +53,11 @@ int WinMain()
         return -1;
     }
 
+    // configure global states
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
+
     // load imgui
 
     IMGUI_CHECKVERSION();
@@ -62,11 +67,26 @@ int WinMain()
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 460");
     
-    ShaderManager ModelShader("Shaders/modelVS.glsl", "Shaders/modelFS.glsl");
+    Shader ModelShader("Shaders/modelVS.glsl", "Shaders/modelFS.glsl");
+    Shader SkyboxShader("Shaders/skyboxVS.glsl", "Shaders/skyboxFS.glsl");
 
     Model ourModel("Assets/ModelsSource/backpack/backpack.obj");
 
-    glEnable(GL_DEPTH_TEST);
+    unsigned int skyboxVAO, skyboxVBO;
+    glGenVertexArrays(1, &skyboxVAO);
+    glGenBuffers(1, &skyboxVBO);
+    glBindVertexArray(skyboxVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(SkyboxVertices), &SkyboxVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+    unsigned int CubemapTexture = MaterialManager::LoadCubemap(SkyboxFaces, false);    
+
+    SkyboxShader.Run();
+    SkyboxShader.SetInt("skybox", 0);
+
+    glCullFace(GL_BACK);
 
     // main render loop
 
@@ -121,6 +141,21 @@ int WinMain()
         model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
         ModelShader.SetMat4("model", model);
         ourModel.Draw(ModelShader);
+
+        // draw the skybox after everything else
+        glDepthFunc(GL_LEQUAL);  // change depth function so depth test passes when values are equal to depth buffer's content
+        SkyboxShader.Run();
+        view = glm::mat4(glm::mat3(GlobalCamera.GetViewMatrix())); // remove translation from the view matrix
+        SkyboxShader.SetMat4("view", view);
+        SkyboxShader.SetMat4("projection", projection);
+        // skybox cube
+        glBindVertexArray(skyboxVAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, CubemapTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
+        glDepthFunc(GL_LESS); // set depth function back to default
+
 
         // render the imgui elements
         ImGui::Render();

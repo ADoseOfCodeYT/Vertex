@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "Math.h"
-#include "ShaderManager.h"
+#include "Shader.h"
 
 struct Vertex 
 {
@@ -47,7 +47,7 @@ public:
     Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 
     // render the mesh
-    void Draw(ShaderManager& shader);
+    void Draw(Shader& shader);
 
 private:
     // render data 
