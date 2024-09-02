@@ -24,22 +24,21 @@
     <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp">
       <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
-    <ClCompile Include="MaterialManager.cpp">
-      <Filter>Managers</Filter>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ShaderManager.cpp">
-      <Filter>Managers</Filter>
+      <Filter>Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="MeshManager.cpp">
-      <Filter>Managers</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MaterialManager.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Math.h" />
     <ClInclude Include="Thirdparty\imgui\imconfig.h">
       <Filter>ThirdParty\imgui</Filter>
     </ClInclude>
@@ -67,17 +66,23 @@
     <ClInclude Include="Thirdparty\STBImage\stb_image.h">
       <Filter>ThirdParty\STBImage</Filter>
     </ClInclude>
-    <ClInclude Include="MaterialManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>Managers</Filter>
+    <ClInclude Include="Mesh.h">
+      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ShaderManager.h">
-      <Filter>Managers</Filter>
+      <Filter>Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="MeshManager.h">
-      <Filter>Managers</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialManager.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -93,21 +98,30 @@
     <Filter Include="ThirdParty\imgui">
       <UniqueIdentifier>{e616c39a-e0d5-440b-b49e-b773974344f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers">
-      <UniqueIdentifier>{0d67ac1c-a705-40c6-84cf-a2ac405b9a37}</UniqueIdentifier>
+    <Filter Include="Level">
+      <UniqueIdentifier>{b5c31a02-4ae1-48d7-8fb1-863de3272955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{e5dadc2d-7b31-41e5-b63b-57e086ffe385}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Shaders\cubeFS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\cubeVS.glsl">
+      <Filter>Shaders</Filter>
+    </None>
     <None Include="Shaders\lightingFS.glsl">
       <Filter>Shaders</Filter>
     </None>
     <None Include="Shaders\lightingVS.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\cubeFS.glsl">
+    <None Include="Shaders\modelFS.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="Shaders\cubeVS.glsl">
+    <None Include="Shaders\modelVS.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

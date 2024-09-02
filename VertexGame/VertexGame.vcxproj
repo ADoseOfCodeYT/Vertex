@@ -92,11 +92,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="MeshManager.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="Thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="Thirdparty\imgui\imgui_demo.cpp" />
@@ -107,11 +107,12 @@
     <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MaterialManager.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="MeshManager.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="Thirdparty\imgui\imconfig.h" />
     <ClInclude Include="Thirdparty\imgui\imgui.h" />
@@ -128,6 +129,8 @@
     <None Include="Shaders\cubeVS.glsl" />
     <None Include="Shaders\lightingFS.glsl" />
     <None Include="Shaders\lightingVS.glsl" />
+    <None Include="Shaders\modelFS.glsl" />
+    <None Include="Shaders\modelVS.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
