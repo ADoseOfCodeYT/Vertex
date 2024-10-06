@@ -103,15 +103,6 @@ int WinMain()
             glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         }
 
-        if (WireframeEnabled)
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        }
-        else
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        }
-
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
@@ -181,7 +172,7 @@ void FrameBufferSizeCallBack(GLFWwindow* window, int width, int height)
 
 void ProcessInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS && !IsCtrlDown)
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         GlobalCamera.ProcessMovement(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         GlobalCamera.ProcessMovement(BACKWARD, deltaTime);
@@ -196,10 +187,6 @@ void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods
     if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
     {
         MouseLockEnabled = !MouseLockEnabled;
-    }
-    if (key == GLFW_KEY_W && action == GLFW_PRESS && IsCtrlDown)
-    {
-        WireframeEnabled = !WireframeEnabled;
     }
     if (key == GLFW_KEY_LEFT_CONTROL) IsCtrlDown = action == GLFW_PRESS;
 

@@ -26,7 +26,6 @@ float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
 bool MouseLockEnabled = true;
-bool WireframeEnabled = false;
 
 bool IsCtrlDown = false;
 

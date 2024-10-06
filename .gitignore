@@ -12,6 +12,7 @@ x64/
 
 # Visual Studio
 .vs/
+.vscode/
 
 # Files built by Visual Studio
 *_i.c
