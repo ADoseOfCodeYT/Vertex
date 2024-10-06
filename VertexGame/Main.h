@@ -21,7 +21,7 @@ void MouseCallBack(GLFWwindow* window, double xposIn, double yposIn);
 void ScrollCallBack(GLFWwindow* window, double xoffset, double yoffset);
 void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods); // key presses only triggered once
 
-// timing
+
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
@@ -29,6 +29,6 @@ bool MouseLockEnabled = true;
 
 bool IsCtrlDown = false;
 
-Camera GlobalCamera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera GlobalCamera(glm::vec3(0.0f, 0.0f, 3.0f)); // create a camera
 
 
