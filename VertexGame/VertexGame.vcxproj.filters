@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Application\Main.cpp" />
     <ClCompile Include="Thirdparty\imgui\imgui.cpp">
       <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
@@ -24,21 +24,24 @@
     <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp">
       <Filter>ThirdParty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="Level\Mesh.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="Renderer\Shader.cpp">
       <Filter>Shaders</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="Level\Camera.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="MaterialManager.cpp">
+    <ClCompile Include="Level\MaterialManager.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\EBO.cpp" />
+    <ClCompile Include="Renderer\VAO.cpp" />
+    <ClCompile Include="Renderer\VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main.h" />
+    <ClInclude Include="Application\Main.h" />
     <ClInclude Include="Thirdparty\imgui\imconfig.h">
       <Filter>ThirdParty\imgui</Filter>
     </ClInclude>
@@ -66,27 +69,31 @@
     <ClInclude Include="Thirdparty\STBImage\stb_image.h">
       <Filter>ThirdParty\STBImage</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
+    <ClInclude Include="Level\Mesh.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="Renderer\Shader.h">
       <Filter>Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="Level\Camera.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="MaterialManager.h">
+    <ClInclude Include="Level\MaterialManager.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="Level\Model.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Math.h">
+    <ClInclude Include="Math\Math.h">
       <Filter>Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
+    <ClInclude Include="Level\Level.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\VAO.h" />
+    <ClInclude Include="Renderer\EBO.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\VBO.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -106,6 +113,9 @@
     </Filter>
     <Filter Include="Helpers">
       <UniqueIdentifier>{e5dadc2d-7b31-41e5-b63b-57e086ffe385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Bullet">
+      <UniqueIdentifier>{16090091-dbd3-46a0-b6a2-5c767ead7813}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

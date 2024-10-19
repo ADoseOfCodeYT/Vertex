@@ -92,12 +92,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Level\Camera.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MaterialManager.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Application\Main.cpp" />
+    <ClCompile Include="Level\MaterialManager.cpp" />
+    <ClCompile Include="Level\Mesh.cpp" />
+    <ClCompile Include="Renderer\EBO.cpp" />
+    <ClCompile Include="Renderer\Shader.cpp" />
+    <ClCompile Include="Renderer\VAO.cpp" />
+    <ClCompile Include="Renderer\VBO.cpp" />
     <ClCompile Include="Thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="Thirdparty\imgui\imgui_demo.cpp" />
     <ClCompile Include="Thirdparty\imgui\imgui_draw.cpp" />
@@ -107,14 +110,18 @@
     <ClCompile Include="Thirdparty\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="MaterialManager.h" />
-    <ClInclude Include="Math.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Level\Camera.h" />
+    <ClInclude Include="Level\Level.h" />
+    <ClInclude Include="Application\Main.h" />
+    <ClInclude Include="Level\MaterialManager.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Level\Mesh.h" />
+    <ClInclude Include="Level\Model.h" />
+    <ClInclude Include="Renderer\EBO.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Renderer\Shader.h" />
+    <ClInclude Include="Renderer\VAO.h" />
+    <ClInclude Include="Renderer\VBO.h" />
     <ClInclude Include="Thirdparty\imgui\imconfig.h" />
     <ClInclude Include="Thirdparty\imgui\imgui.h" />
     <ClInclude Include="Thirdparty\imgui\imgui_impl_glfw.h" />

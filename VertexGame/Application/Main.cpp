@@ -57,6 +57,9 @@ int WinMain()
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+
 
     // load imgui
 
@@ -72,27 +75,40 @@ int WinMain()
 
     Model ourModel("Assets/ModelsSource/backpack/backpack.obj");
 
-    unsigned int skyboxVAO, skyboxVBO;
-    glGenVertexArrays(1, &skyboxVAO);
-    glGenBuffers(1, &skyboxVBO);
-    glBindVertexArray(skyboxVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(SkyboxVertices), &SkyboxVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    VAO skyboxVAO;
+    skyboxVAO.Bind();
+    VBO skyboxVBO(SkyboxVertices, sizeof(SkyboxVertices));
+    
+    skyboxVAO.LinkVBO(skyboxVBO, 0);
+    skyboxVAO.Unbind();
+    skyboxVBO.Unbind();
+
 
     unsigned int CubemapTexture = MaterialManager::LoadCubemap(SkyboxFaces, false);    
 
     SkyboxShader.Run();
     SkyboxShader.SetInt("skybox", 0);
 
-    glCullFace(GL_BACK);
-
     // main render loop
 
     while (!glfwWindowShouldClose(window))
     {
-        ProcessInput(window); // TODO: replace with SDL
+        float CurrentFrame = static_cast<float>(glfwGetTime());
+        DeltaTime = CurrentFrame - LastFrame;
+        FrameCount++;
+
+        if (DeltaTime >= 1.0 / 60.0)
+        {
+            FPS = std::to_string((1.0 / DeltaTime) * FrameCount);
+            MS = std::to_string((DeltaTime / FrameCount) * 1000);
+            Metrics = "FPS: " + FPS + " MS: " + MS;
+
+            LastFrame = CurrentFrame;
+            FrameCount = 0;
+
+            ProcessInput(window); // TODO: replace with SDL
+        }
+
         
         if (MouseLockEnabled)
         {
@@ -103,21 +119,17 @@ int WinMain()
             glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         }
 
-        float currentFrame = static_cast<float>(glfwGetTime());
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
-
-        //rendering
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        ImGui::Begin("wow a window");
-        ImGui::Text("idk what to do with it");
+        ImGui::Begin("Metrics");
+        ImGui::Text(Metrics.c_str());
         ImGui::End();
+
+        //rendering
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         ModelShader.Run();
 
@@ -140,7 +152,7 @@ int WinMain()
         SkyboxShader.SetMat4("view", view);
         SkyboxShader.SetMat4("projection", projection);
         // skybox cube
-        glBindVertexArray(skyboxVAO);
+        skyboxVAO.Bind();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, CubemapTexture);
         glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -173,13 +185,17 @@ void FrameBufferSizeCallBack(GLFWwindow* window, int width, int height)
 void ProcessInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        GlobalCamera.ProcessMovement(FORWARD, deltaTime);
+        GlobalCamera.ProcessMovement(FORWARD, DeltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        GlobalCamera.ProcessMovement(BACKWARD, deltaTime);
+        GlobalCamera.ProcessMovement(BACKWARD, DeltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        GlobalCamera.ProcessMovement(LEFT, deltaTime);
+        GlobalCamera.ProcessMovement(LEFT, DeltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        GlobalCamera.ProcessMovement(RIGHT, deltaTime);
+        GlobalCamera.ProcessMovement(RIGHT, DeltaTime);
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        GlobalCamera.ProcessMovement(UP, DeltaTime);
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        GlobalCamera.ProcessMovement(DOWN, DeltaTime);
 }
 
 void KeyCallBack(GLFWwindow* window, int key, int scancode, int action, int mods)

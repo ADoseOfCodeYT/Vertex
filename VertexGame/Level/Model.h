@@ -13,9 +13,9 @@
 #include <map>
 #include <vector>
 
-#include "Mesh.h"
-#include "Math.h"
-#include "Shader.h"
+#include "../Level/Mesh.h"
+#include "../Math/Math.h"
+#include "../Renderer/Shader.h"
 
 unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma = false);
 

@@ -22,17 +22,21 @@ glm::mat4 Camera::GetViewMatrix()
     return glm::lookAt(Position, Position + Front, Up);
 }
 
-void Camera::ProcessMovement(Camera_Movement WishDir, float deltaTime)
+void Camera::ProcessMovement(Camera_Movement WishDir, float DeltaTime)
 {
-    float velocity = MovementSpeed * deltaTime;
+    float Velocity = MovementSpeed * DeltaTime;
     if (WishDir == FORWARD)
-        Position += Front * velocity;
+        Position += Front * Velocity;
     if (WishDir == BACKWARD)
-        Position -= Front * velocity;
+        Position -= Front * Velocity;
     if (WishDir == LEFT)
-        Position -= Right * velocity;
+        Position -= Right * Velocity;
     if (WishDir == RIGHT)
-        Position += Right * velocity;
+        Position += Right * Velocity;
+    if (WishDir == UP)
+        Position += Up * Velocity;
+    if(WishDir == DOWN)
+        Position -= Up * Velocity;
 }
 
 void Camera::ProcessMouseMovement(float xOffset, float yOffset, GLboolean ConstrainPitch)

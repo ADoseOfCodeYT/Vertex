@@ -4,20 +4,22 @@
 
 #include <glad/glad.h>
 
-#include "Math.h"
+#include "../Math/Math.h"
 
 // Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
 enum Camera_Movement {
     FORWARD,
     BACKWARD,
     LEFT,
-    RIGHT
+    RIGHT,
+    UP,
+    DOWN,
 };
 
 // Default camera values
 const float YAW = -90.0f;
 const float PITCH = 0.0f;
-const float SPEED = 2.5f;
+const float SPEED = 4.0f;
 const float SENSITIVITY = 0.1f;
 const float ZOOM = 45.0f;
 const float NEAR_PLANE = 0.1f;
@@ -50,7 +52,7 @@ public:
 
     glm::mat4 GetViewMatrix();
 
-    void ProcessMovement(Camera_Movement WishDir, float deltaTime);
+    void ProcessMovement(Camera_Movement WishDir, float DeltaTime);
 
     void ProcessMouseMovement(float xOffset, float yOffset, GLboolean ConstrainPitch = true);
 

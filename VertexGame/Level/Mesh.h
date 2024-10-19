@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 
-#include "Math.h"
-#include "Shader.h"
+#include "../Math/Math.h"
+#include "../Renderer/Shader.h"
 
 struct Vertex 
 {

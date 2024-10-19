@@ -8,7 +8,7 @@
 #include <sstream>
 #include <iostream>
 
-#include "Math.h"
+#include "../Math/Math.h"
 
 // REMEBER: TO DEBUG SHADER RELATED ERRORS, CHECK THE CONSOLE IN DEBUG MODE
 class Shader
